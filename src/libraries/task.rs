@@ -1,8 +1,8 @@
 #[allow(improper_ctypes)]
 extern "C" {
-    fn lib_task_delay(amount: f64, task: Box<dyn Fn() + Send + 'static>);
-    fn lib_task_defer(task: Box<dyn Fn() + Send + 'static>);
-    fn lib_task_spawn(task: Box<dyn Fn() + Send + 'static>);
+    fn lib_task_delay(amount: f64, task: Box<dyn FnOnce() + Send + 'static>);
+    fn lib_task_defer(task: Box<dyn FnOnce() + Send + 'static>);
+    fn lib_task_spawn(task: Box<dyn FnOnce() + Send + 'static>);
     fn lib_task_wait(amount: f64) -> f64;
 }
 
