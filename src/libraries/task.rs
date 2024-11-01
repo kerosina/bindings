@@ -6,15 +6,15 @@ extern "C" {
     fn lib_task_wait(amount: f64) -> f64;
 }
 
-pub fn delay<F: Fn() + 'static>(amount: f64, value: F) {
+pub fn delay<F: FnOnce() + Send + 'static>(amount: f64, value: F) {
     unsafe { lib_task_delay(amount, Box::new(value)) }
 }
 
-pub fn defer<F: Fn() + 'static>(value: F) {
+pub fn defer<F: FnOnce() + Send + 'static>(value: F) {
     unsafe { lib_task_defer(Box::new(value)) }
 }
 
-pub fn spawn<F: Fn() + 'static>(value: F) {
+pub fn spawn<F: FnOnce() + Send + 'static>(value: F) {
     unsafe { lib_task_spawn(Box::new(value)) }
 }
 
